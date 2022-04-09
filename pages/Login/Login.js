@@ -7,7 +7,7 @@ import {
 import { useDispatch } from "react-redux";
 import { loginUser, registerUser } from "../../store/auth/authSlice";
 import { LoginForm } from "./LoginForm";
-import { LoginHeader } from "./LoginHeader";
+import { Header } from "../../components/Header";
 
 export const Login = ({navigation}) => {
   const dispatch = useDispatch();
@@ -62,7 +62,7 @@ export const Login = ({navigation}) => {
 
   return (
     <View style={styles.pageContainer}>
-      <LoginHeader />
+      <Header text="XOPA CHAMOOOO"/>
       <LoginForm 
         handleButton={handleButton} 
         loading={loading} 

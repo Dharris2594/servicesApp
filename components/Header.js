@@ -1,10 +1,10 @@
 import React from 'react';
 import { View, StyleSheet, Text } from 'react-native';
 
-export const LoginHeader = (props) => (
+export const Header = ({style, text}) => (
     <View>
-        <View style={{...styles.contenedor}}>
-            <Text style={{fontSize: 40}}>XOPA CHAMOOOO</Text>
+        <View style={{...styles.contenedor, ...style}}>
+            <Text style={{fontSize: 40}}>{text}</Text>
         </View>
     </View>
 );

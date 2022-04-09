@@ -2,10 +2,8 @@ import React from 'react';
 import { View, StyleSheet, Text } from 'react-native';
 
 export const MyServices = (props) => (
-    <View>
-        <View style={{...styles.contenedor}}>
-            <Text style={{fontSize: 40}}>My Services Page</Text>
-        </View>
+    <View style={{...styles.contenedor}}>
+        <Text style={{fontSize: 40}}>XOPA CHAMOOOO</Text>
     </View>
 );
 

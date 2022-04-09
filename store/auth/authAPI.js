@@ -15,7 +15,6 @@ export const tryLogin = async (userData) => {
 
 export const logOut = async() => {
     const requestUrl = "http://152.67.46.150:5984/_session";
-
     const response = await fetch(requestUrl, {
         method: 'DELETE', 
     });
