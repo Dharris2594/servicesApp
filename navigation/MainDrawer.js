@@ -1,5 +1,6 @@
 import { Services } from "../pages/Services/Services";
 import { MyServices } from "../pages/MyServices/MyServices";
+import { RequestedServices } from "../pages/RequestedServices/RequestedServices";
 import { createDrawerNavigator, DrawerItem} from "@react-navigation/drawer";
 import { useCallback } from "react";
 import { Alert, BackHandler } from "react-native";
@@ -61,7 +62,7 @@ export const MainDrawer = ({navigation}) => {
         <DrawerItem label="Cerrar Sesión" onPress={logOutMessage} />
       </DrawerContentScrollView>
     );
-  }
+  }0
 
   return (
     <Drawer.Navigator
@@ -70,6 +71,7 @@ export const MainDrawer = ({navigation}) => {
     >
       <Drawer.Screen name="Services" component={Services} />
       <Drawer.Screen name="MyServices" component={MyServices} />
+      <Drawer.Screen name="RequestedServices" component={RequestedServices} />
     </Drawer.Navigator>
   );
 };

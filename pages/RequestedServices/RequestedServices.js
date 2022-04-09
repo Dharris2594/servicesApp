@@ -2,10 +2,9 @@ import React from 'react';
 import { View, StyleSheet, Text } from 'react-native';
 import { Card } from '../Card/Card';
 
-
-export const MyServices = (props) => (
+export const RequestedServices = (props) => (
     <View style={{...styles.contenedor}}>
-        <Text style={{fontSize: 40}}>My Services</Text>
+        <Text style={{fontSize: 40}}>Requested Services</Text>
         <Card/>
     </View>
 );
