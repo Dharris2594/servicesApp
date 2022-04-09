@@ -9,7 +9,7 @@ import { loginUser, registerUser } from "../../store/auth/authSlice";
 import { LoginForm } from "./LoginForm";
 import { LoginHeader } from "./LoginHeader";
 
-export const Login = () => {
+export const Login = ({navigation}) => {
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(false);
 
@@ -40,7 +40,7 @@ export const Login = () => {
         dispatch(registerUser(userData)).unwrap()
         .then(response => {
           setLoading(false);
-          console.log(response);
+          navigation.navigate('Services');
         })
         .catch(error => {
           showErrorMessage(error);
@@ -51,7 +51,7 @@ export const Login = () => {
       dispatch(loginUser(userData)).unwrap()
       .then(response => {
         setLoading(false);
-        console.log(response);
+        navigation.navigate('Services');
       })
       .catch(error => {
         setLoading(false);
