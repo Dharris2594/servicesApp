@@ -6,6 +6,7 @@ import { Provider } from 'react-redux';
 import { Login } from './pages/Login/Login';
 import store from './store/store';
 import { Services } from './pages/Services/Services';
+import { MyServices } from './pages/MyServices/MyServices';
 
 const Stack = createNativeStackNavigator();
 
@@ -16,6 +17,7 @@ export default function App() {
       <Stack.Navigator>
         <Stack.Screen name='Login' component={Login} />
         <Stack.Screen  options={{ title: 'Overview' }} name='Services' component={Services} />
+        <Stack.Screen  options={{ title: 'Details' }} name='MyServices' component={MyServices} />
       </Stack.Navigator>
     </NavigationContainer>
     </Provider>
