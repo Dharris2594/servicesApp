@@ -8,11 +8,8 @@ export const loginUser = createAsyncThunk('auth/login', async (userData, { rejec
         return rejectWithValue('Usuario o contraseña incorrectos!');
     }
 
-    const cookie = response.headers.get('Set-Cookie');
-
     return {
-        username: userData.username,
-        cookie: cookie
+        username: userData.username
     };
 });
 
@@ -32,29 +29,26 @@ export const registerUser = createAsyncThunk('auth/register', async (userData, {
 
     const response2 = await tryLogin(userData);
 
-    const cookie = response2.headers.get('Set-Cookie');
-
     return {
-        username: userData.username,
-        cookie: cookie
+        username: userData.username
     };
 });
 
 const authSlice = createSlice({
     initialState: {
         username: '',
-        cookie: '',
+        loggedIn: false,
     },
     name: 'auth',
     reducers: {},
     extraReducers: {
         [loginUser.fulfilled]: (state, action) => {
             state.username = action.payload.username;
-            state.cookie = action.payload.cookie;
+            state.loggedIn = true;
         },
         [registerUser.fulfilled]: (state, action) => {
             state.username = action.payload.username;
-            state.cookie = action.payload.cookie;
+            state.loggedIn = true;
         },
     }
 });
