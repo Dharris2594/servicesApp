@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useCallback, useState } from "react";
 import {
   View,
   Text,
@@ -11,12 +11,22 @@ import {
   UIManager,
   Platform,
 } from "react-native";
+import { useFocusEffect } from "@react-navigation/native";
 
 export const LoginForm = ({handleButton, loading}) => {
   const [user, setUser] = useState("");
   const [pass, setPass] = useState("");
   const [rePass, setRepass] = useState("");
   const [register, toggleRegister] = useState(false);
+
+  useFocusEffect(
+    useCallback(() => {
+      setUser('');
+      setPass('');
+      setRepass('');
+      toggleRegister(false);
+    }, [])
+  );
 
   const repeatPass = () => {
     if (register) {

@@ -1,12 +1,12 @@
 import React from 'react';
 import { View, StyleSheet, Text } from 'react-native';
+import { Card } from '../Card/Card';
 
 export const Services = (props) => (
-    <View>
         <View style={{...styles.contenedor}}>
-            <Text style={{fontSize: 40}}>XOPA CHAMOOOO</Text>
+            <Text style={{fontSize: 40}}>Services</Text>
+            <Card/>
         </View>
-    </View>
 );
 
 const styles = StyleSheet.create({

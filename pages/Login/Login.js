@@ -7,7 +7,7 @@ import {
 import { useDispatch } from "react-redux";
 import { loginUser, registerUser } from "../../store/auth/authSlice";
 import { LoginForm } from "./LoginForm";
-import { LoginHeader } from "./LoginHeader";
+import { Header } from "../../components/Header";
 
 export const Login = ({navigation}) => {
   const dispatch = useDispatch();
@@ -40,7 +40,7 @@ export const Login = ({navigation}) => {
         dispatch(registerUser(userData)).unwrap()
         .then(response => {
           setLoading(false);
-          navigation.navigate('Services');
+          navigation.navigate('Drawer');
         })
         .catch(error => {
           showErrorMessage(error);
@@ -51,7 +51,7 @@ export const Login = ({navigation}) => {
       dispatch(loginUser(userData)).unwrap()
       .then(response => {
         setLoading(false);
-        navigation.navigate('Services');
+        navigation.navigate('Drawer');
       })
       .catch(error => {
         setLoading(false);
@@ -62,7 +62,7 @@ export const Login = ({navigation}) => {
 
   return (
     <View style={styles.pageContainer}>
-      <LoginHeader />
+      <Header text="XOPA CHAMOOOO"/>
       <LoginForm 
         handleButton={handleButton} 
         loading={loading} 
