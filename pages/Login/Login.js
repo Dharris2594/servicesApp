@@ -40,7 +40,7 @@ export const Login = ({navigation}) => {
         dispatch(registerUser(userData)).unwrap()
         .then(response => {
           setLoading(false);
-          navigation.navigate('Services');
+          navigation.navigate('Drawer');
         })
         .catch(error => {
           showErrorMessage(error);
@@ -51,7 +51,7 @@ export const Login = ({navigation}) => {
       dispatch(loginUser(userData)).unwrap()
       .then(response => {
         setLoading(false);
-        navigation.navigate('Services');
+        navigation.navigate('Drawer');
       })
       .catch(error => {
         setLoading(false);
