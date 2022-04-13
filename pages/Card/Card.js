@@ -22,7 +22,7 @@ const Item = ({ title }) => (
   </View>
 );
 
-const Card = () => {
+const Card = ({data}) => {
   const renderItem = ({ item }) => (
     <Item title={item.title} />
   );
@@ -30,7 +30,7 @@ const Card = () => {
   return (
     <SafeAreaView style={styles.container}>
       <FlatList
-        data={DATA}
+        data={data}
         renderItem={renderItem}
         keyExtractor={item => item.id}
       />

@@ -44,7 +44,7 @@ export const MainDrawer = ({navigation}) => {
   useFocusEffect(
     useCallback(() => {
       const onBackPress = () => {
-        console.log('HOLA')
+        return true;
       };
       BackHandler.addEventListener('hardwareBackPress', onBackPress);
 
