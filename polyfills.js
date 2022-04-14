@@ -1,4 +1,4 @@
-import {decode, encode} from 'base-64'
+import {decode, encode} from 'base-64';
 
 if (!global.btoa) {
     global.btoa = encode;
@@ -9,4 +9,4 @@ if (!global.atob) {
 }
 
 // Avoid using node dependent modules
-process.browser = true
+process.browser = true;

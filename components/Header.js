@@ -11,7 +11,7 @@ export const Header = ({style, text}) => (
 
 const styles = StyleSheet.create({
     contenedor: {
-        backgroundColor: "#4682B4",
+        backgroundColor: '#4682B4',
         height: 250,
         alignItems: 'center',
         justifyContent: 'center',

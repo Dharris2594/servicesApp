@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import { tryLogin, createUser, logOut, createUserDB, configureUserDB } from './authAPI';
+import { tryLogin, createUser, logOut } from './authAPI';
 
 export const loginUser = createAsyncThunk('auth/login', async (userData, { rejectWithValue }) => {
     const response = await tryLogin(userData);
@@ -9,7 +9,7 @@ export const loginUser = createAsyncThunk('auth/login', async (userData, { rejec
     }
 
     return {
-        username: userData.username
+        username: userData.username,
     };
 });
 
@@ -24,26 +24,14 @@ export const registerUser = createAsyncThunk('auth/register', async (userData, {
         return rejectWithValue('Error creando el usuario');
     }
 
-    const response2 = await createUserDB(userData.username);
+    const response2 = await tryLogin(userData);
 
-    if(!response2.ok){
-        return rejectWithValue('Error creando base de datos de usuario');
-    }
-
-    const response3 = await configureUserDB(userData.username);
-
-    if(!response3.ok){
-        return rejectWithValue('Error configurando base de datos de usuario');
-    }
-
-    const response4 = await tryLogin(userData);
-
-    if(!response4.ok) {
+    if (!response2.ok) {
         return rejectWithValue('Ha Ocurrido un error en el registro');
     }
 
     return {
-        username: userData.username
+        username: userData.username,
     };
 });
 
@@ -73,7 +61,7 @@ const authSlice = createSlice({
         [logOutUser.fulfilled]: (state, action) => {
             state.username = '';
         },
-    }
+    },
 });
 
 export const SelectCurrentUsername = state => state.auth.username;

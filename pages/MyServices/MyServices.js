@@ -1,40 +1,59 @@
-import React, { useEffect } from 'react';
-import { View, StyleSheet, Text } from 'react-native';
-import { Card } from '../Card/Card';
-import { useFocusEffect } from '@react-navigation/native';
+import React, { useEffect, useState } from 'react';
+import { View, StyleSheet, Text, Alert } from 'react-native';
+import { ServiceList } from '../ServiceList/ServiceList';
 import { useDispatch, useSelector } from 'react-redux';
-import { loadMyServices, syncMyServices, cancelMyServicesSync } from '../../store/myServices/myServicesSlice';
-import { SelectmyServices, SelectMyServicesLoading } from '../../store/myServices/myServicesSlice';
+import { loadMyServices } from '../../store/myServices/myServicesSlice';
+import { SelectmyServices } from '../../store/myServices/myServicesSlice';
 import { SelectCurrentUsername } from '../../store/auth/authSlice';
+import PouchDB from '../../pouchdb.js';
+
+const remoteDb = new PouchDB('http://admin:1111@152.67.46.150:5984/services');
+const localDb = new PouchDB('myServices', { adapter: 'react-native-sqlite' });
 
 export const MyServices = (props) => {
-    const dispatch = useDispatch();
+  const dispatch = useDispatch();
+  const [loading, setLoading] = useState(false);
 
-    const myServices = useSelector(SelectmyServices);
-    const myServicesLoading = useSelector(SelectMyServicesLoading)
-    const username = useSelector(SelectCurrentUsername);
+  const myServices = useSelector(SelectmyServices);
+  const username = useSelector(SelectCurrentUsername);
 
-    useEffect(() => {
-        console.log('HOLA');
-        dispatch(syncMyServices(username));
+  const showErrorMessage = (errorMessage) => {
+    Alert.alert('Ha Ocurrido un Error', errorMessage, [
+      { text: 'Aceptar' },
+  ]);
+  };
 
-        return dispatch(cancelMyServicesSync());
-    }, []);
+  useEffect(() => {
+    setLoading(true);
+    const syncHandler = PouchDB.sync(remoteDb, localDb, {
+      live: true,
+      retry: true,
+      selector: {
+        'userId': `org.couchdb.user:${username.toLowerCase().trim()}`,
+      },
+    }).on('paused', () => {
+      setLoading(true);
+      dispatch(loadMyServices(username)).unwrap()
+      .then(result => setLoading(false))
+      .catch(err => showErrorMessage(err));
+    });
 
-    return (
-        <View style={{...styles.contenedor}}>
-            {!myServicesLoading ? 
-            <Card data={myServices}/> : <Text>Cargando</Text>}
-        </View>
-    )
-}
+    return () => syncHandler.cancel();
+  }, [dispatch, username]);
+
+  return (
+    <View style={{ ...styles.contenedor }}>
+      {!loading ? <ServiceList data={myServices} /> : <Text>Cargando</Text>}
+    </View>
+  );
+};
 
 const styles = StyleSheet.create({
-    contenedor: {
-        flex: 1,
-        backgroundColor: "#4682B4",
-        height: 250,
-        alignItems: 'center',
-        justifyContent: 'center',
-    },
+  contenedor: {
+    flex: 1,
+    backgroundColor: '#4682B4',
+    height: 250,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
 });

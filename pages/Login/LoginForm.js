@@ -1,4 +1,4 @@
-import { useCallback, useState } from "react";
+import React, { useCallback, useState } from 'react';
 import {
   View,
   Text,
@@ -10,13 +10,13 @@ import {
   LayoutAnimation,
   UIManager,
   Platform,
-} from "react-native";
-import { useFocusEffect } from "@react-navigation/native";
+} from 'react-native';
+import { useFocusEffect } from '@react-navigation/native';
 
 export const LoginForm = ({handleButton, loading}) => {
-  const [user, setUser] = useState("");
-  const [pass, setPass] = useState("");
-  const [rePass, setRepass] = useState("");
+  const [user, setUser] = useState('');
+  const [pass, setPass] = useState('');
+  const [rePass, setRepass] = useState('');
   const [register, toggleRegister] = useState(false);
 
   useFocusEffect(
@@ -69,13 +69,13 @@ export const LoginForm = ({handleButton, loading}) => {
         ) : (
           <Button
             onPress={() => handleButton(user, pass, rePass, register)}
-            title={register ? "Crear Usuario" : "Iniciar Sesion"}
+            title={register ? 'Crear Usuario' : 'Iniciar Sesion'}
           />
         )}
         <TouchableWithoutFeedback
           onPress={() => {
             toggleRegister((state) => !state);
-            if (Platform.OS === "android") {
+            if (Platform.OS === 'android') {
               if (UIManager.setLayoutAnimationEnabledExperimental) {
                 UIManager.setLayoutAnimationEnabledExperimental(true);
               }
@@ -85,8 +85,8 @@ export const LoginForm = ({handleButton, loading}) => {
         >
           <Text style={styles.subtext}>
             {!register
-              ? "¿No tienes una cuenta? ¡Registrate!"
-              : "¿Ya tienes una cuenta? ¡Inicia Sesion!"}
+              ? '¿No tienes una cuenta? ¡Registrate!'
+              : '¿Ya tienes una cuenta? ¡Inicia Sesion!'}
           </Text>
         </TouchableWithoutFeedback>
       </View>
@@ -97,7 +97,7 @@ export const LoginForm = ({handleButton, loading}) => {
 const styles = StyleSheet.create({
   container: {
       marginVertical: 20,
-      marginHorizontal: 30
+      marginHorizontal: 30,
   },
   textInput: {
     marginVertical: 10,
@@ -107,8 +107,8 @@ const styles = StyleSheet.create({
     marginVertical: 20,
   },
   subtext: {
-    textDecorationLine: "underline",
-    alignSelf: "center",
+    textDecorationLine: 'underline',
+    alignSelf: 'center',
     marginTop: 20,
   },
 });

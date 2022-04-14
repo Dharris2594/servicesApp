@@ -1,11 +1,4 @@
 {
-  "expo": {
-    "name": "servicesApp",
-    "slug": "servicesApp",
-    "version": "1.0.0",
-    "assetBundlePatterns": [
-      "**/*"
-    ]
-  },
-  "name": "servicesApp"
+  "name": "servicesApp",
+  "displayName": "servicesApp"
 }
