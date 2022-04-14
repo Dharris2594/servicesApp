@@ -1,18 +1,18 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import React from 'react';
-import { MyServices } from '../pages/MyServices/MyServices';
+import { Services } from '../pages/Services/Services';
 import { ServiceDetail } from '../pages/ServiceDetail/ServiceDetail';
 import { HamburgerHeaderLeft } from '../components/HamburgerHeaderLeft';
 
 const Stack = createNativeStackNavigator();
 
-export const MyServicesStack = ({navigation}) => {
+export const ServicesStack = ({navigation}) => {
 
   return (
     <Stack.Navigator>
       <Stack.Screen
-        name="MyServices"
-        component={MyServices}
+        name="Services"
+        component={Services}
         options={{headerLeft: () => <HamburgerHeaderLeft />,
         }}
         />

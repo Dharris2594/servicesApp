@@ -1,5 +1,3 @@
-import { Services } from '../pages/Services/Services';
-import { MyServices } from '../pages/MyServices/MyServices';
 import { RequestedServices } from '../pages/RequestedServices/RequestedServices';
 import { createDrawerNavigator, DrawerItem} from '@react-navigation/drawer';
 import React, { useCallback } from 'react';
@@ -14,6 +12,7 @@ import { logOutUser, SelectCurrentUsername } from '../store/auth/authSlice';
 import { DrawerActions } from '@react-navigation/native';
 import { useFocusEffect } from '@react-navigation/native';
 import { MyServicesStack } from './MyServicesStack';
+import { ServicesStack } from './ServicesStack';
 
 const Drawer = createDrawerNavigator();
 
@@ -70,8 +69,8 @@ export const MainDrawer = ({navigation}) => {
       drawerContent={(props) => CustomDrawerContent(props)}
       initialRouteName="Services"
     >
-      <Drawer.Screen name="Services" component={Services} />
-      <Drawer.Screen name="MyServiceStack" component={MyServicesStack}  />
+      <Drawer.Screen name="ServicesStack" component={ServicesStack} options={{headerShown: false}} />
+      <Drawer.Screen name="MyServicesStack" component={MyServicesStack} options={{headerShown: false}} />
       <Drawer.Screen name="RequestedServices" component={RequestedServices} />
     </Drawer.Navigator>
   );

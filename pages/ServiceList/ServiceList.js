@@ -1,6 +1,6 @@
 import { useNavigation } from '@react-navigation/native';
 import React from 'react';
-import { SafeAreaView, View, FlatList, StyleSheet, Text, StatusBar } from 'react-native';
+import { SafeAreaView, FlatList, StyleSheet, Text, StatusBar } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 
 const Item = ({ title, id }) => {
@@ -8,7 +8,7 @@ const Item = ({ title, id }) => {
 
   return (
     <TouchableOpacity
-    onPress={() => navigation.push('ServiceDetail', {id: id})}
+    onPress={() => navigation.push('ServiceDetail', {id: id, title: title})}
     style={styles.item}>
       <Text style={styles.title}>{title}</Text>
     </TouchableOpacity>

@@ -2,19 +2,18 @@ import React, { useEffect, useState } from 'react';
 import { View, StyleSheet, Text, Alert } from 'react-native';
 import { ServiceList } from '../ServiceList/ServiceList';
 import { useDispatch, useSelector } from 'react-redux';
-import { loadMyServices } from '../../store/myServices/myServicesSlice';
-import { SelectmyServices } from '../../store/myServices/myServicesSlice';
+import { loadUserServices } from '../../store/services/servicesSlice';
+import { SelectUserServices } from '../../store/services/servicesSlice';
 import { SelectCurrentUsername } from '../../store/auth/authSlice';
+import { remoteServiceDb, localServiceDb } from '../../constants.js';
 import PouchDB from '../../pouchdb.js';
 
-const remoteDb = new PouchDB('http://admin:1111@152.67.46.150:5984/services');
-const localDb = new PouchDB('myServices', { adapter: 'react-native-sqlite' });
 
-export const MyServices = (props) => {
+export const MyServices = ({navigation}) => {
   const dispatch = useDispatch();
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
 
-  const myServices = useSelector(SelectmyServices);
+  const myServices = useSelector(SelectUserServices);
   const username = useSelector(SelectCurrentUsername);
 
   const showErrorMessage = (errorMessage) => {
@@ -24,16 +23,14 @@ export const MyServices = (props) => {
   };
 
   useEffect(() => {
-    setLoading(true);
-    const syncHandler = PouchDB.sync(remoteDb, localDb, {
+    const syncHandler = PouchDB.sync(remoteServiceDb, localServiceDb, {
       live: true,
       retry: true,
       selector: {
         'userId': `org.couchdb.user:${username.toLowerCase().trim()}`,
       },
     }).on('paused', () => {
-      setLoading(true);
-      dispatch(loadMyServices(username)).unwrap()
+      dispatch(loadUserServices(username)).unwrap()
       .then(result => setLoading(false))
       .catch(err => showErrorMessage(err));
     });
