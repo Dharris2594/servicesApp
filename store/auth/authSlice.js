@@ -1,9 +1,9 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import { remoteServiceDb } from '../../constants.js';
+import { localDb, remoteDb } from '../../dbs.js';
 
 export const loginUser = createAsyncThunk('auth/login', async (userData, { rejectWithValue }) => {
     try {
-        const response = await remoteServiceDb.logIn(userData.username.trim(), userData.password.trim());
+        const response = await remoteDb.logIn(userData.username.trim(), userData.password.trim());
 
         return {
             username: response.name,
@@ -21,11 +21,11 @@ export const loginUser = createAsyncThunk('auth/login', async (userData, { rejec
 
 export const registerUser = createAsyncThunk('auth/register', async (userData, { rejectWithValue }) => {
     try {
-        await remoteServiceDb.signUp(userData.username.trim(), userData.password.trim(), {
+        await remoteDb.signUp(userData.username.trim(), userData.password.trim(), {
             roles: ['customer'],
         });
 
-        const response = await remoteServiceDb.logIn(userData.username.trim(), userData.password.trim());
+        const response = await remoteDb.logIn(userData.username.trim(), userData.password.trim());
 
         return {
             username: response.name,
@@ -47,7 +47,7 @@ export const registerUser = createAsyncThunk('auth/register', async (userData, {
 
 export const logOutUser = createAsyncThunk('auth/logout', async (data, {rejectWithValue}) => {
     try {
-        await remoteServiceDb.logOut();
+        await remoteDb.logOut();
     }
     catch (error) {
         return rejectWithValue(error);

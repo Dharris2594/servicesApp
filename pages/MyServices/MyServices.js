@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { loadUserServices } from '../../store/services/servicesSlice';
 import { SelectUserServices } from '../../store/services/servicesSlice';
 import { SelectCurrentUsername } from '../../store/auth/authSlice';
-import { remoteServiceDb, localServiceDb } from '../../constants.js';
+import { remoteDb, localDb } from '../../dbs.js';
 import PouchDB from '../../pouchdb.js';
 
 
@@ -24,7 +24,7 @@ export const MyServices = ({navigation}) => {
 
   useEffect(() => {
     console.log(username);
-    const syncHandler = PouchDB.sync(remoteServiceDb, localServiceDb, {
+    const syncHandler = PouchDB.sync(remoteDb, localDb, {
       live: true,
       retry: true,
       selector: {

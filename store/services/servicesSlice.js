@@ -1,11 +1,11 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import { localServiceDb, remoteServiceDb } from '../../constants.js';
+import { localDb, remoteDb } from '../../dbs.js';
 
 export const loadUserServices = createAsyncThunk(
   'services/loadUserServices',
   async (username, { rejectWithValue }) => {
     try {
-      const response =  await localServiceDb
+      const response =  await localDb
       .find({
         selector: {
           author: `org.couchdb.user:${username}`,
@@ -26,7 +26,7 @@ export const loadServices = createAsyncThunk(
     'services/loadServices',
     async (data, { rejectWithValue }) => {
         try {
-            const response = await remoteServiceDb
+            const response = await remoteDb
             .find({
                 selector: {
                     updated_at: {$gt: true},
