@@ -1,48 +1,57 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import { tryLogin, createUser, logOut } from './authAPI';
+import { remoteServiceDb } from '../../constants.js';
 
 export const loginUser = createAsyncThunk('auth/login', async (userData, { rejectWithValue }) => {
-    const response = await tryLogin(userData);
+    try {
+        const response = await remoteServiceDb.logIn(userData.username.trim(), userData.password.trim());
 
-    if (!response.ok){
-        return rejectWithValue('Usuario o contraseña incorrectos!');
+        return {
+            username: response.name,
+        };
     }
-
-    return {
-        username: userData.username,
-    };
+    catch (err) {
+        if (err.name === 'unauthorized' || err.name === 'forbidden'){
+            return rejectWithValue('Usuario o contraseña incorrectos!');
+        }
+        else {
+            return rejectWithValue('Ha ocurrido un error!');
+        }
+    }
 });
 
 export const registerUser = createAsyncThunk('auth/register', async (userData, { rejectWithValue }) => {
-    const response = await createUser(userData);
+    try {
+        await remoteServiceDb.signUp(userData.username.trim(), userData.password.trim(), {
+            roles: ['customer'],
+        });
 
-    if (response.status === 409) {
-        return rejectWithValue('El usuario ya esta tomado');
+        const response = await remoteServiceDb.logIn(userData.username.trim(), userData.password.trim());
+
+        return {
+            username: response.name,
+        };
     }
-
-    if (!response.ok) {
-        return rejectWithValue('Error creando el usuario');
+    catch (err) {
+        if (err.name === 'conflict') {
+            return rejectWithValue('El usuario ya esta tomado!');
+        }
+        else if (err.name === 'forbidden') {
+            return rejectWithValue('Nombre de usuario invalido!');
+        }
+        else {
+            console.log(err);
+            return rejectWithValue('Ha ocurrido un error!');
+        }
     }
-
-    const response2 = await tryLogin(userData);
-
-    if (!response2.ok) {
-        return rejectWithValue('Ha Ocurrido un error en el registro');
-    }
-
-    return {
-        username: userData.username,
-    };
 });
 
 export const logOutUser = createAsyncThunk('auth/logout', async (data, {rejectWithValue}) => {
-    const response = await logOut();
-
-    if (!response.ok) {
-        return rejectWithValue('Ha ocurrido un Error');
+    try {
+        await remoteServiceDb.logOut();
     }
-
-    return await response.json();
+    catch (error) {
+        return rejectWithValue(error);
+    }
 });
 
 const authSlice = createSlice({

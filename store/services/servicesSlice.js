@@ -8,7 +8,7 @@ export const loadUserServices = createAsyncThunk(
       const response =  await localServiceDb
       .find({
         selector: {
-          userId: `org.couchdb.user:${username.toLowerCase().trim()}`,
+          author: `org.couchdb.user:${username}`,
         },
         fields: ['_id', 'title', 'rating', 'categoryId'],
       });
@@ -17,14 +17,14 @@ export const loadUserServices = createAsyncThunk(
         docs: response.docs,
       };
     } catch (err) {
-      rejectWithValue(err);
+      return rejectWithValue(err);
     }
   }
 );
 
 export const loadServices = createAsyncThunk(
     'services/loadServices',
-    async (data, {rejectWithValue}) => {
+    async (data, { rejectWithValue }) => {
         try {
             const response = await remoteServiceDb
             .find({
@@ -38,7 +38,7 @@ export const loadServices = createAsyncThunk(
                 docs: response.docs,
             };
         } catch (err) {
-            rejectWithValue(err);
+            return rejectWithValue(err);
         }
     }
 );
@@ -55,8 +55,8 @@ const servicesSlice = createSlice({
       state.userServices = action.payload.docs;
     },
     [loadServices.fulfilled]: (state, action) => {
-        state.services = action.payload.docs;
-      },
+      state.services = action.payload.docs;
+    },
   },
 });
 

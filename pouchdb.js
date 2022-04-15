@@ -4,6 +4,7 @@ import replication from '@craftzdog/pouchdb-replication-react-native';
 import mapreduce from 'pouchdb-mapreduce';
 import PouchdbFind from 'pouchdb-find';
 import PouchdbUpsert from 'pouchdb-upsert';
+import PouchDBAuth from 'pouchdb-authentication';
 
 import SQLite from 'react-native-sqlite-2';
 import SQLiteAdapterFactory from 'pouchdb-adapter-react-native-sqlite';
@@ -16,5 +17,6 @@ export default PouchDB
     .plugin(mapreduce)
     .plugin(SQLiteAdapter)
     .plugin(PouchdbFind)
-    .plugin(PouchdbUpsert);
+    .plugin(PouchdbUpsert)
+    .plugin(PouchDBAuth);
 

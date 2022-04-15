@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { View, StyleSheet, Text, Alert } from 'react-native';
+import { View, StyleSheet, ActivityIndicator, Alert } from 'react-native';
 import { ServiceList } from '../ServiceList/ServiceList';
 import { useDispatch, useSelector } from 'react-redux';
 import { loadUserServices } from '../../store/services/servicesSlice';
@@ -23,16 +23,17 @@ export const MyServices = ({navigation}) => {
   };
 
   useEffect(() => {
+    console.log(username);
     const syncHandler = PouchDB.sync(remoteServiceDb, localServiceDb, {
       live: true,
       retry: true,
       selector: {
-        'userId': `org.couchdb.user:${username.toLowerCase().trim()}`,
+        'author': `org.couchdb.user:${username}`,
       },
     }).on('paused', () => {
       dispatch(loadUserServices(username)).unwrap()
       .then(result => setLoading(false))
-      .catch(err => showErrorMessage(err));
+      .catch(err => showErrorMessage(err.message));
     });
 
     return () => syncHandler.cancel();
@@ -40,7 +41,7 @@ export const MyServices = ({navigation}) => {
 
   return (
     <View style={{ ...styles.contenedor }}>
-      {!loading ? <ServiceList data={myServices} /> : <Text>Cargando</Text>}
+      {!loading ? <ServiceList data={myServices} /> : <ActivityIndicator size="large" color="#4682B4" />}
     </View>
   );
 };
@@ -48,7 +49,7 @@ export const MyServices = ({navigation}) => {
 const styles = StyleSheet.create({
   contenedor: {
     flex: 1,
-    backgroundColor: '#4682B4',
+    backgroundColor: '#FFF',
     height: 250,
     alignItems: 'center',
     justifyContent: 'center',
