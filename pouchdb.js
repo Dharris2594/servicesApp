@@ -11,12 +11,10 @@ import SQLiteAdapterFactory from 'pouchdb-adapter-react-native-sqlite';
 
 const SQLiteAdapter = SQLiteAdapterFactory(SQLite);
 
-export default PouchDB
-    .plugin(HttpPouch)
-    .plugin(replication)
-    .plugin(mapreduce)
-    .plugin(SQLiteAdapter)
-    .plugin(PouchdbFind)
-    .plugin(PouchdbUpsert)
-    .plugin(PouchDBAuth);
-
+export default PouchDB.plugin(HttpPouch)
+  .plugin(replication)
+  .plugin(mapreduce)
+  .plugin(SQLiteAdapter)
+  .plugin(PouchdbFind)
+  .plugin(PouchdbUpsert)
+  .plugin(PouchDBAuth);

@@ -1,33 +1,32 @@
-import React, { useState } from 'react';
-import { View, StyleSheet, Text, TouchableOpacity, Image, Alert, ActivityIndicator } from 'react-native';
+import React, { useCallback, useState } from 'react';
+import { Alert } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
-import { Button } from '@rneui/base';
 import { SelectService } from '../../store/services/servicesSlice';
-import { TextInput } from 'react-native-gesture-handler';
-import {launchImageLibrary} from 'react-native-image-picker';
+import { launchImageLibrary } from 'react-native-image-picker';
 import { SelectCurrentUsername } from '../../store/auth/authSlice';
 import { addUpdateUserService } from '../../store/services/servicesSlice';
+import { AddUpdateServiceUI } from './AddUpdateServiceUI';
 
-const imgDefault = require('../../assets/resources/img_default.png');
-
-export const AddUpdateService = ({route, navigation}) => {
+export const AddUpdateService = ({ route, navigation }) => {
   const { id } = route.params;
   const service = useSelector(SelectService(id));
   const dispatch = useDispatch();
-  const [title, setTitle] = useState(service != null ? service.title : '');
-  const [description, setDescription] = useState(service != null ? service.description : '');
-  const [price, setPrice] = useState(service != null ? service.price.toString() : '');
-  const [image, setImage] = useState(service != null ? service.img : '');
   const username = useSelector(SelectCurrentUsername);
   const [loading, setLoading] = useState(false);
+  const [title, setTitle] = useState(service != null ? service.title : '');
+  const [description, setDescription] = useState(
+    service != null ? service.description : ''
+  );
+  const [price, setPrice] = useState(
+    service != null ? service.price.toString() : ''
+  );
+  const [image, setImage] = useState(service != null ? service.img : '');
 
   const showErrorMessage = (errorMessage) => {
-    Alert.alert('Ha Ocurrido un Error', errorMessage, [
-      { text: 'Aceptar' },
-  ]);
+    Alert.alert('Ha Ocurrido un Error', errorMessage, [{ text: 'Aceptar' }]);
   };
 
-  const openGallery = async () => {
+  const openGallery = useCallback(async () => {
     try {
       const result = await launchImageLibrary({
         maxWidth: 200,
@@ -35,14 +34,12 @@ export const AddUpdateService = ({route, navigation}) => {
         mediaType: 'photo',
         includeBase64: true,
       });
-
       setImage(result.assets[0].base64);
-    }
-    catch (error) {}
-  };
+    } catch (error) {}
+  }, []);
 
-  const addUpdateService = () => {
-    if (title === '' || description === '' || price === '' || image === ''){
+  const addUpdateService = useCallback(() => {
+    if (title === '' || description === '' || price === '' || image === '') {
       showErrorMessage('Favor Rellene los campos');
       return;
     }
@@ -59,76 +56,52 @@ export const AddUpdateService = ({route, navigation}) => {
       img: image,
     };
 
-    dispatch(addUpdateUserService(data)).unwrap()
-    .then(response => {
-      Alert.alert(id ? 'Editar Publicacion' : 'Agregar Publicacion', 'Cambios realizados con exito', [
-        { text: 'Aceptar', onPress: () => {
-          setLoading(false);
-          navigation.popToTop();
-        }},
-      ]);
-    })
-    .catch(err => {
-      setLoading(false);
-      showErrorMessage(err);
-    });
-  };
+    dispatch(addUpdateUserService(data))
+      .unwrap()
+      .then((response) => {
+        setLoading(false);
+        Alert.alert(
+          id ? 'Editar Publicacion' : 'Agregar Publicacion',
+          'Cambios realizados con exito',
+          [
+            {
+              text: 'Aceptar',
+              onPress: () => {
+                navigation.popToTop();
+              },
+            },
+          ]
+        );
+      })
+      .catch((err) => {
+        setLoading(false);
+        showErrorMessage(err);
+      });
+  }, [
+    description,
+    dispatch,
+    image,
+    id,
+    navigation,
+    price,
+    service,
+    title,
+    username,
+  ]);
 
   return (
-    <View style={styles.contenedor}>
-      <TouchableOpacity
-        onPress={openGallery}
-      >
-        <Image style={{
-        width: '95%',
-        height: 150,
-        resizeMode: 'contain'
-    }}
-          source={image !== '' ? {uri: `data:image;base64,${image}`} : imgDefault}
-        />
-      </TouchableOpacity>
-      <Text>Titulo</Text>
-      <TextInput
-        style={styles.textInput}
-        value={title}
-        onChangeText={(t) => setTitle(t)}
-      />
-      <Text>Precio</Text>
-      <TextInput
-        style={styles.textInput}
-        value={price}
-        onChangeText={(t) => setPrice(t)}
-      />
-      <Text>Descripcion</Text>
-      <TextInput
-        multiline={true}
-        style={styles.textArea}
-        value={description}
-        numberOfLines={4}
-        onChangeText={(t) => setDescription(t)}
-      />
-      <View style={{marginTop: 20}}>
-      {loading ? (
-          <ActivityIndicator size="large" color="#CCC" />
-        ) : (
-          <Button
-          onPress={addUpdateService}  title={id ? 'Guardar Cambios' : 'Publicar Anuncio +'}/>
-        )}
-      </View>
-    </View>
+    <AddUpdateServiceUI
+      image={image}
+      openGallery={openGallery}
+      title={title}
+      setTitle={setTitle}
+      price={price}
+      setPrice={setPrice}
+      description={description}
+      setDescription={setDescription}
+      loading={loading}
+      id={id}
+      addUpdateService={addUpdateService}
+    />
   );
 };
-
-const styles = StyleSheet.create({
-  contenedor: {
-    height: 250,
-    margin: 30,
-  },
-  textInput: {
-    borderBottomWidth: 1,
-  },
-  textArea: {
-    marginTop: 10,
-    borderWidth: 1,
-  },
-});

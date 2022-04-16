@@ -6,8 +6,7 @@ export const loadUserServices = createAsyncThunk(
   'services/loadUserServices',
   async (data, { rejectWithValue }) => {
     try {
-      const response =  await localDb
-      .find({
+      const response = await localDb.find({
         selector: {
           author: data.user,
         },
@@ -25,36 +24,34 @@ export const loadUserServices = createAsyncThunk(
 );
 
 export const loadServices = createAsyncThunk(
-    'services/loadServices',
-    async (page, { rejectWithValue }) => {
-        try {
-            const response = await remoteDb
-            .find({
-                selector: {
-                    updated_at: {$gt: true},
-                },
-                limit: 5,
-                skip: (page - 1) * 5,
-            });
+  'services/loadServices',
+  async (page, { rejectWithValue }) => {
+    try {
+      const response = await remoteDb.find({
+        selector: {
+          updated_at: { $gt: true },
+        },
+        limit: 5,
+        skip: (page - 1) * 5,
+      });
 
-            return {
-                docs: response.docs,
-            };
-        } catch (err) {
-            return rejectWithValue(err);
-        }
+      return {
+        docs: response.docs,
+      };
+    } catch (err) {
+      return rejectWithValue(err);
     }
+  }
 );
 
 export const deleteUserService = createAsyncThunk(
   'services/deleteUserService',
   async (service, { rejectWithValue }) => {
     try {
-      const response = await localDb.put(service);
+      await localDb.put(service);
 
       return service;
-    }
-    catch (err) {
+    } catch (err) {
       console.log(JSON.stringify(err));
       return rejectWithValue(JSON.stringify(err));
     }
@@ -85,8 +82,7 @@ export const addUpdateUserService = createAsyncThunk(
       }
 
       return service;
-    }
-    catch (err) {
+    } catch (err) {
       return rejectWithValue(JSON.stringify(err));
     }
   }
@@ -109,10 +105,11 @@ const servicesSlice = createSlice({
   },
 });
 
-
 export const SelectUserServices = (state) => state.services.userServices;
 export const SelectServices = (state) => state.services.services;
-export const SelectMyService = serviceId => (state) => state.services.userServices.filter(({_id}) => _id === serviceId )[0];
-export const SelectService = serviceId => (state) => state.services.services.filter(({_id}) => _id === serviceId )[0];
+export const SelectMyService = (serviceId) => (state) =>
+  state.services.userServices.filter(({ _id }) => _id === serviceId)[0];
+export const SelectService = (serviceId) => (state) =>
+  state.services.services.filter(({ _id }) => _id === serviceId)[0];
 
 export default servicesSlice.reducer;
