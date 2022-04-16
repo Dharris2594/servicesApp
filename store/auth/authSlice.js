@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import { localDb, remoteDb } from '../../dbs.js';
+import { remoteDb } from '../../dbs.js';
 
 export const loginUser = createAsyncThunk('auth/login', async (userData, { rejectWithValue }) => {
     try {
@@ -62,10 +62,10 @@ const authSlice = createSlice({
     reducers: {},
     extraReducers: {
         [loginUser.fulfilled]: (state, action) => {
-            state.username = action.payload.username;
+            state.username = `org.couchdb.user:${action.payload.username}`;
         },
         [registerUser.fulfilled]: (state, action) => {
-            state.username = action.payload.username;
+            state.username = `org.couchdb.user:${action.payload.username}`;
         },
         [logOutUser.fulfilled]: (state, action) => {
             state.username = '';

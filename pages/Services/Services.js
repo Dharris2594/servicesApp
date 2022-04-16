@@ -1,6 +1,6 @@
 import React, { useCallback, useState } from 'react';
 import { View, StyleSheet, ActivityIndicator, Alert } from 'react-native';
-import { ServiceList } from '../ServiceList/ServiceList';
+import { ServiceList } from '../../components/ServiceList';
 import { useDispatch, useSelector } from 'react-redux';
 import { loadServices } from '../../store/services/servicesSlice';
 import { SelectServices } from '../../store/services/servicesSlice';
@@ -21,15 +21,18 @@ export const Services = ({navigation}) => {
 
   useFocusEffect(
     useCallback(() => {
-        dispatch(loadServices()).unwrap()
+        dispatch(loadServices(1)).unwrap()
         .then(result => setLoading(false))
-        .catch(err => showErrorMessage(err.message));
+        .catch(err => {
+          setLoading(false);
+          showErrorMessage(err.message);
+        });
     }, [dispatch])
   );
 
   return (
     <View style={{ ...styles.contenedor }}>
-      {!loading ? <ServiceList data={services} /> : <ActivityIndicator size="large" color="#4682B4" />}
+      {!loading ? <ServiceList data={services} redirect="ServiceDetail" /> : <ActivityIndicator size="large" color="#4682B4" />}
     </View>
   );
 };

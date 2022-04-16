@@ -3,21 +3,21 @@ import React from 'react';
 import { SafeAreaView, FlatList, StyleSheet, Text, StatusBar } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 
-const Item = ({ title, id }) => {
+const Item = ({ title, id, redirect }) => {
   const navigation = useNavigation();
 
   return (
     <TouchableOpacity
-    onPress={() => navigation.push('ServiceDetail', {id: id, title: title})}
+    onPress={() => navigation.push(redirect, {id: id, title: title})}
     style={styles.item}>
       <Text style={styles.title}>{title}</Text>
     </TouchableOpacity>
   );
 };
 
-const ServiceList = ({data}) => {
+const ServiceList = ({data, redirect}) => {
   const renderItem = ({ item }) => (
-    <Item title={item.title} id={item._id} />
+    <Item title={item.title} id={item._id} redirect={redirect} />
   );
 
   return (

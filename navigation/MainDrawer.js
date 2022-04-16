@@ -1,4 +1,3 @@
-import { RequestedServices } from '../pages/RequestedServices/RequestedServices';
 import { createDrawerNavigator, DrawerItem} from '@react-navigation/drawer';
 import React, { useCallback } from 'react';
 import { Alert, BackHandler } from 'react-native';
@@ -57,7 +56,7 @@ export const MainDrawer = ({navigation}) => {
   function CustomDrawerContent(props) {
     return (
       <DrawerContentScrollView {...props}>
-        <Header text={`Hola ${userName}`} size={75} />
+        <Header text={`Hola ${userName.replace('org.couchdb.user:', '')}`} size={75} />
         <DrawerItemList {...props} />
         <DrawerItem label="Cerrar Sesión" onPress={logOutMessage} />
       </DrawerContentScrollView>
@@ -71,7 +70,6 @@ export const MainDrawer = ({navigation}) => {
     >
       <Drawer.Screen name="ServicesStack" component={ServicesStack} options={{headerShown: false}} />
       <Drawer.Screen name="MyServicesStack" component={MyServicesStack} options={{headerShown: false}} />
-      <Drawer.Screen name="RequestedServices" component={RequestedServices} />
     </Drawer.Navigator>
   );
 };
