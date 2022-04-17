@@ -34,9 +34,7 @@ export const MyServiceDetail = ({ navigation, route }) => {
               .then((response) => {
                 navigation.pop();
               })
-              .catch((error) => {
-                console.log(error);
-              });
+              .catch((error) => {});
           },
         },
       ]

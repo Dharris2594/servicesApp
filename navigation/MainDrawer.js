@@ -1,6 +1,6 @@
-import { createDrawerNavigator, DrawerItem} from '@react-navigation/drawer';
-import React, { useCallback } from 'react';
-import { Alert, BackHandler } from 'react-native';
+import { createDrawerNavigator, DrawerItem } from '@react-navigation/drawer';
+import React from 'react';
+import { Alert } from 'react-native';
 import {
   DrawerContentScrollView,
   DrawerItemList,
@@ -9,13 +9,12 @@ import { Header } from '../components/Header';
 import { useDispatch, useSelector } from 'react-redux';
 import { logOutUser, SelectCurrentUsername } from '../store/auth/authSlice';
 import { DrawerActions } from '@react-navigation/native';
-import { useFocusEffect } from '@react-navigation/native';
 import { MyServicesStack } from './MyServicesStack';
 import { ServicesStack } from './ServicesStack';
 
 const Drawer = createDrawerNavigator();
 
-export const MainDrawer = ({navigation}) => {
+export const MainDrawer = ({ navigation }) => {
   const userName = useSelector(SelectCurrentUsername);
   const dispatch = useDispatch();
 
@@ -32,31 +31,19 @@ export const MainDrawer = ({navigation}) => {
               navigation.dispatch(DrawerActions.closeDrawer());
               navigation.pop();
             })
-            .catch((error) => {
-              console.log(error);
-            });
+            .catch((error) => {});
         },
       },
     ]);
   };
 
-  useFocusEffect(
-    useCallback(() => {
-      const onBackPress = () => {
-        return true;
-      };
-      BackHandler.addEventListener('hardwareBackPress', onBackPress);
-
-      return () =>
-        BackHandler.removeEventListener('hardwareBackPress', onBackPress);
-    }, [])
-  );
-
-
   function CustomDrawerContent(props) {
     return (
       <DrawerContentScrollView {...props}>
-        <Header text={`Hola ${userName.replace('org.couchdb.user:', '')}`} size={75} />
+        <Header
+          text={`Hola ${userName.replace('org.couchdb.user:', '')}`}
+          size={75}
+        />
         <DrawerItemList {...props} />
         <DrawerItem label="Cerrar Sesión" onPress={logOutMessage} />
       </DrawerContentScrollView>
@@ -65,11 +52,20 @@ export const MainDrawer = ({navigation}) => {
 
   return (
     <Drawer.Navigator
+      screenOptions={{ swipeEdgeWidth: 0 }}
       drawerContent={(props) => CustomDrawerContent(props)}
       initialRouteName="Services"
     >
-      <Drawer.Screen name="ServicesStack" component={ServicesStack} options={{headerShown: false}} />
-      <Drawer.Screen name="MyServicesStack" component={MyServicesStack} options={{headerShown: false}} />
+      <Drawer.Screen
+        name="ServicesStack"
+        component={ServicesStack}
+        options={{ headerShown: false }}
+      />
+      <Drawer.Screen
+        name="MyServicesStack"
+        component={MyServicesStack}
+        options={{ headerShown: false }}
+      />
     </Drawer.Navigator>
   );
 };

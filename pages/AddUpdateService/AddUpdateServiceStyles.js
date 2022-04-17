@@ -4,9 +4,13 @@ export const styles = StyleSheet.create({
   contenedor: {
     height: 250,
     margin: 30,
+    flex: 1,
   },
   textInput: {
     borderBottomWidth: 1,
+  },
+  text: {
+    marginVertical: 10,
   },
   textArea: {
     marginTop: 10,
@@ -18,4 +22,7 @@ export const styles = StyleSheet.create({
     resizeMode: 'contain',
   },
   loading: { marginTop: 20 },
+  picker: {
+    borderWidth: 1,
+  },
 });

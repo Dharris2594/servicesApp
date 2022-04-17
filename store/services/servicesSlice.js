@@ -39,7 +39,7 @@ export const loadServices = createAsyncThunk(
         docs: response.docs,
       };
     } catch (err) {
-      return rejectWithValue(err);
+      return rejectWithValue(err.message);
     }
   }
 );
@@ -52,7 +52,6 @@ export const deleteUserService = createAsyncThunk(
 
       return service;
     } catch (err) {
-      console.log(JSON.stringify(err));
       return rejectWithValue(JSON.stringify(err));
     }
   }
@@ -70,7 +69,7 @@ export const addUpdateUserService = createAsyncThunk(
         rating: 4.8,
         author: data.author,
         price: parseInt(data.price, 10),
-        categories: [],
+        category: data.category,
         img: data.img,
         updated_at: Date.now(),
       };

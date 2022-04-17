@@ -25,7 +25,6 @@ export const MyServices = ({ navigation }) => {
   };
 
   useEffect(() => {
-    console.log(username);
     const syncHandler = PouchDB.sync(remoteDb, localDb, {
       live: true,
       retry: true,

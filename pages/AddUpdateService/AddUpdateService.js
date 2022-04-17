@@ -21,6 +21,7 @@ export const AddUpdateService = ({ route, navigation }) => {
     service != null ? service.price.toString() : ''
   );
   const [image, setImage] = useState(service != null ? service.img : '');
+  const [selectedCategory, setSelectedCategory] = useState('Seleccionar');
 
   const showErrorMessage = (errorMessage) => {
     Alert.alert('Ha Ocurrido un Error', errorMessage, [{ text: 'Aceptar' }]);
@@ -39,7 +40,13 @@ export const AddUpdateService = ({ route, navigation }) => {
   }, []);
 
   const addUpdateService = useCallback(() => {
-    if (title === '' || description === '' || price === '' || image === '') {
+    if (
+      title === '' ||
+      description === '' ||
+      price === '' ||
+      image === '' ||
+      selectedCategory === 'Seleccionar'
+    ) {
       showErrorMessage('Favor Rellene los campos');
       return;
     }
@@ -49,6 +56,7 @@ export const AddUpdateService = ({ route, navigation }) => {
     const data = {
       _id: service != null ? service._id : null,
       _rev: service != null ? service._rev : null,
+      category: selectedCategory,
       title: title,
       description: description,
       author: username,
@@ -87,6 +95,7 @@ export const AddUpdateService = ({ route, navigation }) => {
     service,
     title,
     username,
+    selectedCategory,
   ]);
 
   return (
@@ -102,6 +111,8 @@ export const AddUpdateService = ({ route, navigation }) => {
       loading={loading}
       id={id}
       addUpdateService={addUpdateService}
+      selectedCategory={selectedCategory}
+      setSelectedCategory={setSelectedCategory}
     />
   );
 };

@@ -7,7 +7,7 @@ import { styles } from './MyServicesStyles';
 export const MyServicesUI = ({ loading, myServices, navigateAddService }) => {
   return (
     <View style={styles.pageContainer}>
-      <View style={{ ...styles.contenedor }}>
+      <View style={styles.contenedor}>
         {!loading ? (
           <ServiceList data={myServices} redirect="MyServiceDetail" />
         ) : (

@@ -3,6 +3,7 @@ import { StyleSheet } from 'react-native';
 export const styles = StyleSheet.create({
   pageContainer: { flex: 1, backgroundColor: '#FFF' },
   contenedor: {
+    flex: 1,
     height: 250,
     alignItems: 'center',
     justifyContent: 'center',
@@ -10,7 +11,6 @@ export const styles = StyleSheet.create({
   button: {
     marginVertical: 20,
     marginRight: 20,
-    flex: 1,
     alignItems: 'flex-end',
     justifyContent: 'flex-end',
   },

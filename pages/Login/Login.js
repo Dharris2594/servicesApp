@@ -16,6 +16,14 @@ export const Login = ({ navigation }) => {
     Alert.alert('Ha Ocurrido un Error', errorMessage, [{ text: 'Aceptar' }]);
   };
 
+  const resetFields = () => {
+    setLoading(false);
+    setUser('');
+    setPass('');
+    setRepass('');
+    toggleRegister(false);
+  };
+
   const handleButton = useCallback(async () => {
     if (user === '' || pass === '' || (rePass === '' && register)) {
       showErrorMessage('Favor Ingrese Usuario y Contraseña');
@@ -37,7 +45,7 @@ export const Login = ({ navigation }) => {
       dispatch(registerUser(userData))
         .unwrap()
         .then((response) => {
-          setLoading(false);
+          resetFields();
           navigation.navigate('Drawer');
         })
         .catch((error) => {
@@ -48,7 +56,7 @@ export const Login = ({ navigation }) => {
       dispatch(loginUser(userData))
         .unwrap()
         .then((response) => {
-          setLoading(false);
+          resetFields();
           navigation.navigate('Drawer');
         })
         .catch((error) => {

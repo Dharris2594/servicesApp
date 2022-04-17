@@ -6,21 +6,15 @@ import { HamburgerHeaderLeft } from '../components/HamburgerHeaderLeft';
 
 const Stack = createNativeStackNavigator();
 
-export const ServicesStack = ({navigation}) => {
-
+export const ServicesStack = () => {
   return (
     <Stack.Navigator>
       <Stack.Screen
         name="Services"
         component={Services}
-        options={{headerLeft: () => <HamburgerHeaderLeft />,
-        }}
-        />
-        <Stack.Screen
-        name="ServiceDetail"
-        component={ServiceDetail}
+        options={{ headerLeft: () => <HamburgerHeaderLeft /> }}
       />
+      <Stack.Screen name="ServiceDetail" component={ServiceDetail} />
     </Stack.Navigator>
   );
 };
-

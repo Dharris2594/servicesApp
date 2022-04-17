@@ -1,10 +1,11 @@
-import React, { useCallback, useState } from 'react';
-import { Alert } from 'react-native';
+import React, { useCallback, useEffect, useState } from 'react';
+import { BackHandler, Alert, ToastAndroid } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { loadServices } from '../../store/services/servicesSlice';
 import { SelectServices } from '../../store/services/servicesSlice';
 import { useFocusEffect } from '@react-navigation/native';
 import { ServicesUI } from './ServicesUI';
+import NetInfo from '@react-native-community/netinfo';
 
 export const Services = () => {
   const dispatch = useDispatch();
@@ -12,22 +13,40 @@ export const Services = () => {
 
   const services = useSelector(SelectServices);
 
-  const showErrorMessage = (errorMessage) => {
-    Alert.alert('Ha Ocurrido un Error', errorMessage, [{ text: 'Aceptar' }]);
-  };
-
   useFocusEffect(
     useCallback(() => {
       setLoading(true);
       dispatch(loadServices(1))
         .unwrap()
         .then((result) => setLoading(false))
-        .catch((err) => {
+        .catch(() => {
           setLoading(false);
-          showErrorMessage(err.message);
         });
     }, [dispatch])
   );
+
+  useEffect(() => {
+    const unsubscribe = NetInfo.addEventListener((state) => {
+      const message = state.isConnected ? 'De nuevo en línea!' : 'Sin Conexión';
+      ToastAndroid.showWithGravity(
+        message,
+        ToastAndroid.LONG,
+        ToastAndroid.BOTTOM
+      );
+    });
+
+    return unsubscribe;
+  }, [dispatch]);
+
+  useEffect(() => {
+    const onBackPress = () => {
+      return true;
+    };
+    BackHandler.addEventListener('hardwareBackPress', onBackPress);
+
+    return () =>
+      BackHandler.removeEventListener('hardwareBackPress', onBackPress);
+  }, []);
 
   return <ServicesUI loading={loading} services={services} />;
 };

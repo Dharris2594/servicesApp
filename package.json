@@ -12,6 +12,8 @@
   "dependencies": {
     "@craftzdog/pouchdb-core-react-native": "^7.2.2",
     "@craftzdog/pouchdb-replication-react-native": "^7.0.0",
+    "@react-native-community/netinfo": "^8.2.0",
+    "@react-native-picker/picker": "^2.4.1",
     "@react-navigation/drawer": "^6.4.1",
     "@react-navigation/native": "^6.0.10",
     "@react-navigation/native-stack": "^6.6.1",
