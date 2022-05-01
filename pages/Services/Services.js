@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useState } from 'react';
-import { BackHandler, Alert, ToastAndroid } from 'react-native';
+import { BackHandler } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { loadServices } from '../../store/services/servicesSlice';
 import { SelectServices } from '../../store/services/servicesSlice';
@@ -24,19 +24,6 @@ export const Services = () => {
         });
     }, [dispatch])
   );
-
-  useEffect(() => {
-    const unsubscribe = NetInfo.addEventListener((state) => {
-      const message = state.isConnected ? 'De nuevo en línea!' : 'Sin Conexión';
-      ToastAndroid.showWithGravity(
-        message,
-        ToastAndroid.LONG,
-        ToastAndroid.BOTTOM
-      );
-    });
-
-    return unsubscribe;
-  }, [dispatch]);
 
   useEffect(() => {
     const onBackPress = () => {

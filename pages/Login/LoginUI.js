@@ -1,5 +1,6 @@
 import React, { useRef } from 'react';
 import {
+  Image,
   View,
   Text,
   TextInput,
@@ -12,7 +13,6 @@ import {
   SafeAreaView,
   ScrollView,
 } from 'react-native';
-import { Header } from '../../components/Header';
 import { styles } from './LoginStyles';
 
 export const LoginUI = ({
@@ -30,11 +30,17 @@ export const LoginUI = ({
   const input2 = useRef();
   const input3 = useRef();
 
+  const logo = require('../../assets/resources/loginLogo.png');
+  const rectangle = require('../../assets/resources/rectangle.png');
+  const googleLogo = require('../../assets/resources/googleLogo.png');
+  const fbLogo = require('../../assets/resources/fbLogo.png');
+  const twitterLogo = require('../../assets/resources/twitterLogo.png');
+
   const repeatPass = () => {
     if (register) {
       return (
         <View>
-          <Text>Repetir Contraseña</Text>
+          <Text style={styles.text}>Repetir Contraseña</Text>
           <TextInput
             ref={input3}
             secureTextEntry
@@ -52,9 +58,10 @@ export const LoginUI = ({
   return (
     <SafeAreaView style={styles.pageContainer}>
       <ScrollView showsVerticalScrollIndicator={false}>
-        <Header text="XOPA CHAMOOO" />
+        <Image style={styles.rectangle} source={rectangle} />
+        <Image style={styles.logo} source={logo} />
         <View style={styles.container}>
-          <Text>Usuario</Text>
+          <Text style={styles.text}>Usuario</Text>
           <TextInput
             value={user}
             returnKeyType="next"
@@ -63,7 +70,7 @@ export const LoginUI = ({
             placeholder=""
             onSubmitEditing={() => input2.current.focus()}
           />
-          <Text>Contraseña</Text>
+          <Text style={styles.text}>Contraseña</Text>
           <TextInput
             ref={input2}
             secureTextEntry
@@ -80,6 +87,7 @@ export const LoginUI = ({
               <ActivityIndicator size="large" color="#CCC" />
             ) : (
               <Button
+                color={'#019CA4'}
                 onPress={handleButton}
                 title={register ? 'Crear Usuario' : 'Iniciar Sesion'}
               />
@@ -102,6 +110,20 @@ export const LoginUI = ({
               </Text>
             </TouchableWithoutFeedback>
           </View>
+          {!register && (
+            <View>
+              <View style={styles.rowView}>
+                <View style={styles.line} />
+                <Text style={styles.ingresaConText}>Ingresar con</Text>
+                <View style={styles.line} />
+              </View>
+              <View style={styles.logoRowView}>
+                <Image style={styles.socialNetworkLogo} source={googleLogo} />
+                <Image style={styles.socialNetworkLogo} source={fbLogo} />
+                <Image style={styles.socialNetworkLogo} source={twitterLogo} />
+              </View>
+            </View>
+          )}
         </View>
       </ScrollView>
     </SafeAreaView>
