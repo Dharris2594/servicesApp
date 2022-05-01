@@ -84,7 +84,7 @@ export const LoginUI = ({
           {repeatPass()}
           <View style={styles.button}>
             {loading ? (
-              <ActivityIndicator size="large" color="#CCC" />
+              <ActivityIndicator size="large" color="#019CA4" />
             ) : (
               <Button
                 color={'#019CA4'}

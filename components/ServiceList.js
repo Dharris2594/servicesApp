@@ -4,7 +4,7 @@ import { ServiceListItem } from './ServiceListItem';
 
 export const ServiceList = ({ data, redirect }) => {
   const renderItem = ({ item }) => (
-    <ServiceListItem title={item.title} id={item._id} redirect={redirect} />
+    <ServiceListItem ket item={item} redirect={redirect} />
   );
 
   return (
@@ -22,5 +22,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     marginTop: StatusBar.currentHeight || 0,
+    marginBottom: 30,
   },
 });

@@ -13,7 +13,7 @@ export const MyServicesStack = () => {
       <Stack.Screen
         name="MyServices"
         component={MyServices}
-        options={{ headerLeft: () => <HamburgerHeaderLeft /> }}
+        options={{ headerShown: false }}
       />
       <Stack.Screen name="MyServiceDetail" component={MyServiceDetail} />
       <Stack.Screen name="AddUpdateService" component={AddUpdateService} />

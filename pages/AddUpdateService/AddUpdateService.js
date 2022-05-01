@@ -44,7 +44,6 @@ export const AddUpdateService = ({ route, navigation }) => {
       title === '' ||
       description === '' ||
       price === '' ||
-      image === '' ||
       selectedCategory === 'Seleccionar'
     ) {
       showErrorMessage('Favor Rellene los campos');

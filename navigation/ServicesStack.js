@@ -11,8 +11,8 @@ export const ServicesStack = () => {
     <Stack.Navigator>
       <Stack.Screen
         name="Services"
+        options={{ headerShown: false }}
         component={Services}
-        options={{ headerLeft: () => <HamburgerHeaderLeft /> }}
       />
       <Stack.Screen name="ServiceDetail" component={ServiceDetail} />
     </Stack.Navigator>

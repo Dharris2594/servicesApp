@@ -103,7 +103,7 @@ export const AddUpdateServiceUI = ({
         />
         <View style={styles.loading}>
           {loading ? (
-            <ActivityIndicator size="large" color="#CCC" />
+            <ActivityIndicator size="large" color="#019CA4" />
           ) : (
             <Button
               onPress={addUpdateService}

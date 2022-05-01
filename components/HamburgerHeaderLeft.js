@@ -9,7 +9,7 @@ export const HamburgerHeaderLeft = () => {
   return (
     <Icon
       name="menu"
-      size={25}
+      size={30}
       onPress={() => navigation.dispatch(DrawerActions.toggleDrawer())}
       style={styles.icon}
     />

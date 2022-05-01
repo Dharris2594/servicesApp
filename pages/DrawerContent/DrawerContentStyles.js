@@ -18,7 +18,7 @@ export const styles = StyleSheet.create({
   nameText: {
     alignSelf: 'center',
     fontSize: 20,
-    color: 'black',
+    color: '#575757',
   },
   emptyContainer: {
     paddingHorizontal: 5,
@@ -63,7 +63,7 @@ export const styles = StyleSheet.create({
   drawerElementText: {
     marginLeft: 12,
     fontSize: 18,
-    color: 'black',
+    color: '#575757',
   },
   logOutView: {
     justifyContent: 'flex-end',

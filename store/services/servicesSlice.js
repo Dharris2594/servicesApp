@@ -10,8 +10,6 @@ export const loadUserServices = createAsyncThunk(
         selector: {
           author: data.user,
         },
-        limit: 5,
-        skip: (data.page - 1) * 5,
       });
 
       return {
@@ -31,8 +29,6 @@ export const loadServices = createAsyncThunk(
         selector: {
           updated_at: { $gt: true },
         },
-        limit: 5,
-        skip: (page - 1) * 5,
       });
 
       return {

@@ -57,7 +57,7 @@ export const DrawerContentUI = ({ logOutMessage }) => {
               type="material-community"
               size={30}
               name="calendar-edit"
-              color="black"
+              color="#575757"
             />
             <Text style={styles.drawerElementText}>Mis Anuncios</Text>
           </TouchableWithoutFeedback>
@@ -66,7 +66,7 @@ export const DrawerContentUI = ({ logOutMessage }) => {
               size={30}
               type="material-community"
               name="handshake"
-              color="black"
+              color="#575757"
             />
             <Text style={styles.drawerElementText}>Contratos</Text>
           </TouchableWithoutFeedback>
@@ -81,7 +81,7 @@ export const DrawerContentUI = ({ logOutMessage }) => {
             size={30}
             type="material-community"
             name="logout"
-            color="black"
+            color="#575757"
           />
           <Text style={styles.drawerElementText}>Cerrar Sesión</Text>
         </TouchableWithoutFeedback>
