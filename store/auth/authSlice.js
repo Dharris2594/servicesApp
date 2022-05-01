@@ -17,7 +17,7 @@ export const loginUser = createAsyncThunk(
       if (err.name === 'unauthorized' || err.name === 'forbidden') {
         return rejectWithValue('Usuario o contraseña incorrectos!');
       } else {
-        return rejectWithValue('Ha ocurrido un error!');
+        return rejectWithValue('Sin Conexión');
       }
     }
   }
@@ -49,7 +49,6 @@ export const registerUser = createAsyncThunk(
       } else if (err.name === 'forbidden') {
         return rejectWithValue('Nombre de usuario invalido!');
       } else {
-        console.log(err);
         return rejectWithValue('Ha ocurrido un error!');
       }
     }
@@ -62,7 +61,7 @@ export const logOutUser = createAsyncThunk(
     try {
       await remoteDb.logOut();
     } catch (error) {
-      return rejectWithValue(error);
+      return rejectWithValue('Sin Conexión');
     }
   }
 );

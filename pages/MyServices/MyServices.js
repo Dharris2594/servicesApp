@@ -31,15 +31,20 @@ export const MyServices = ({ navigation }) => {
       selector: {
         $or: [{ author: username }, { _deleted: true }],
       },
-    }).on('paused', () => {
-      dispatch(loadUserServices({ user: username, page: 1 }))
-        .unwrap()
-        .then((result) => setLoading(false))
-        .catch((err) => {
-          setLoading(false);
-          showErrorMessage(err.message);
-        });
-    });
+    })
+      .on('paused', () => {
+        console.log('PAUSADO');
+        dispatch(loadUserServices({ user: username, page: 1 }))
+          .unwrap()
+          .then((result) => setLoading(false))
+          .catch((err) => {
+            setLoading(false);
+            showErrorMessage(err.message);
+          });
+      })
+      .on('complete', function (info) {
+        console.log('TERMINADO');
+      });
 
     return () => syncHandler.cancel();
   }, [dispatch, username]);

@@ -18,7 +18,7 @@ export const loadUserServices = createAsyncThunk(
         docs: response.docs,
       };
     } catch (err) {
-      return rejectWithValue(err);
+      return rejectWithValue(JSON.stringify(err));
     }
   }
 );
