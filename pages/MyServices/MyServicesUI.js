@@ -29,7 +29,7 @@ export const MyServicesUI = ({ loading, myServices, navigateAddService }) => {
             <Text style={styles.text}>Publicar Anuncio +</Text>
           </View>
         </TouchableNativeFeedback>
-        <ServiceList data={myServices} redirect="ServiceDetail" />
+        <ServiceList data={myServices} redirect="MyServiceDetail" />
       </View>
     );
   } else {

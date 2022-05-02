@@ -49,7 +49,7 @@ export const AddUpdateServiceUI = ({
 
   return (
     <SafeAreaView style={styles.contenedor}>
-      <ScrollView showsVerticalScrollIndicator={false}>
+      <ScrollView>
         <TouchableOpacity onPress={openGallery}>
           <Image
             style={styles.image}

@@ -42,25 +42,15 @@ export const MyServices = ({ navigation }) => {
             showErrorMessage(err.message);
           });
       })
+      .on('active', function (info) {
+        setLoading(true);
+      })
       .on('complete', function (info) {
         console.log('TERMINADO');
       });
 
     return () => syncHandler.cancel();
   }, [dispatch, username]);
-
-  useFocusEffect(
-    useCallback(() => {
-      setLoading(true);
-      dispatch(loadUserServices({ user: username, page: 1 }))
-        .unwrap()
-        .then((result) => setLoading(false))
-        .catch((err) => {
-          setLoading(false);
-          showErrorMessage(err.message);
-        });
-    }, [dispatch, username])
-  );
 
   return (
     <MyServicesUI

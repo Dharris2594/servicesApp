@@ -14,7 +14,11 @@ export const ServicesStack = () => {
         options={{ headerShown: false }}
         component={Services}
       />
-      <Stack.Screen name="ServiceDetail" component={ServiceDetail} />
+      <Stack.Screen
+        name="ServiceDetail"
+        options={{ headerShown: false }}
+        component={ServiceDetail}
+      />
     </Stack.Navigator>
   );
 };

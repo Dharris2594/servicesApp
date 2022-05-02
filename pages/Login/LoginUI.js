@@ -57,7 +57,7 @@ export const LoginUI = ({
 
   return (
     <SafeAreaView style={styles.pageContainer}>
-      <ScrollView showsVerticalScrollIndicator={false}>
+      <ScrollView>
         <Image style={styles.rectangle} source={rectangle} />
         <Image style={styles.logo} source={logo} />
         <View style={styles.container}>

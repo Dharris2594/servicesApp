@@ -46,7 +46,7 @@ export const DrawerContentUI = ({ logOutMessage }) => {
             style={styles.drawerElement}
             onPress={() => navigation.navigate('ServicesStack')}
           >
-            <Icon size={30} type="material" name="event-note" color="black" />
+            <Icon size={30} type="material" name="event-note" color="#575757" />
             <Text style={styles.drawerElementText}>Anuncios</Text>
           </TouchableWithoutFeedback>
           <TouchableWithoutFeedback

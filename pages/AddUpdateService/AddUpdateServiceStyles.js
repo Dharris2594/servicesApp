@@ -3,8 +3,9 @@ import { StyleSheet } from 'react-native';
 export const styles = StyleSheet.create({
   contenedor: {
     height: 250,
-    margin: 30,
+    padding: 30,
     flex: 1,
+    backgroundColor: 'white',
   },
   textInput: {
     borderBottomWidth: 1,

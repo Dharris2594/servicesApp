@@ -4,7 +4,7 @@ import { ServiceListItem } from './ServiceListItem';
 
 export const ServiceList = ({ data, redirect }) => {
   const renderItem = ({ item }) => (
-    <ServiceListItem ket item={item} redirect={redirect} />
+    <ServiceListItem item={item} redirect={redirect} />
   );
 
   return (

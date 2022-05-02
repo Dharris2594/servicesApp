@@ -25,7 +25,7 @@ export const styles = StyleSheet.create({
   text: {
     fontSize: 16,
     fontWeight: 'bold',
-    color: 'white'
+    color: 'white',
   },
   addServiceButton: {
     marginTop: 20,

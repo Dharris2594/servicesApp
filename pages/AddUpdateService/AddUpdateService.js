@@ -1,7 +1,7 @@
 import React, { useCallback, useState } from 'react';
 import { Alert } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
-import { SelectService } from '../../store/services/servicesSlice';
+import { SelectMyService } from '../../store/services/servicesSlice';
 import { launchImageLibrary } from 'react-native-image-picker';
 import { SelectCurrentUsername } from '../../store/auth/authSlice';
 import { addUpdateUserService } from '../../store/services/servicesSlice';
@@ -9,7 +9,7 @@ import { AddUpdateServiceUI } from './AddUpdateServiceUI';
 
 export const AddUpdateService = ({ route, navigation }) => {
   const { id } = route.params;
-  const service = useSelector(SelectService(id));
+  const service = useSelector(SelectMyService(id));
   const dispatch = useDispatch();
   const username = useSelector(SelectCurrentUsername);
   const [loading, setLoading] = useState(false);
@@ -21,7 +21,9 @@ export const AddUpdateService = ({ route, navigation }) => {
     service != null ? service.price.toString() : ''
   );
   const [image, setImage] = useState(service != null ? service.img : '');
-  const [selectedCategory, setSelectedCategory] = useState('Seleccionar');
+  const [selectedCategory, setSelectedCategory] = useState(
+    service != null ? service.category : 'Seleccionar'
+  );
 
   const showErrorMessage = (errorMessage) => {
     Alert.alert('Ha Ocurrido un Error', errorMessage, [{ text: 'Aceptar' }]);
@@ -30,8 +32,8 @@ export const AddUpdateService = ({ route, navigation }) => {
   const openGallery = useCallback(async () => {
     try {
       const result = await launchImageLibrary({
-        maxWidth: 200,
-        maxHeight: 200,
+        maxWidth: 640,
+        maxHeight: 360,
         mediaType: 'photo',
         includeBase64: true,
       });
@@ -44,6 +46,7 @@ export const AddUpdateService = ({ route, navigation }) => {
       title === '' ||
       description === '' ||
       price === '' ||
+      image === '' ||
       selectedCategory === 'Seleccionar'
     ) {
       showErrorMessage('Favor Rellene los campos');

@@ -49,7 +49,7 @@ const styles = StyleSheet.create({
     padding: 10,
     backgroundColor: '#EFEFEF',
     borderRadius: 15,
-    margin: 5,
+    marginLeft: 10,
   },
   iconContainer: {
     flexDirection: 'row',

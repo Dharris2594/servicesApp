@@ -1,4 +1,4 @@
-import React, { useCallback, useLayoutEffect } from 'react';
+import React, { useCallback } from 'react';
 import { Alert } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { SelectMyService } from '../../store/services/servicesSlice';
@@ -40,10 +40,6 @@ export const MyServiceDetail = ({ navigation, route }) => {
       ]
     );
   }, [dispatch, navigation, service]);
-
-  useLayoutEffect(() => {
-    navigation.setOptions({ headerTitle: route.params.title });
-  }, [navigation, route]);
 
   return (
     <MyServiceDetailUI
