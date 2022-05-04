@@ -34,6 +34,7 @@ export const AddUpdateService = ({ route, navigation }) => {
       const result = await launchImageLibrary({
         maxWidth: 640,
         maxHeight: 360,
+        quality: 0.5,
         mediaType: 'photo',
         includeBase64: true,
       });
