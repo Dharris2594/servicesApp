@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Alert } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { loadUserServices } from '../../store/services/servicesSlice';
@@ -6,7 +6,6 @@ import { SelectUserServices } from '../../store/services/servicesSlice';
 import { SelectCurrentUsername } from '../../store/auth/authSlice';
 import { remoteDb, localDb } from '../../dbs.js';
 import PouchDB from '../../pouchdb.js';
-import { useFocusEffect } from '@react-navigation/native';
 import { MyServicesUI } from './MyServicesUI';
 
 export const MyServices = ({ navigation }) => {

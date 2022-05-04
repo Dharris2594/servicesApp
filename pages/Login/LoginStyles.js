@@ -5,6 +5,7 @@ const { height, width } = Dimensions.get('window');
 export const styles = StyleSheet.create({
   pageContainer: {
     flex: 1,
+    backgroundColor: 'white',
   },
   container: {
     marginHorizontal: 30,

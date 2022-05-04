@@ -69,22 +69,27 @@ export const logOutUser = createAsyncThunk(
 const authSlice = createSlice({
   initialState: {
     username: '',
+    loggedIn: false,
   },
   name: 'auth',
   reducers: {},
   extraReducers: {
     [loginUser.fulfilled]: (state, action) => {
       state.username = `org.couchdb.user:${action.payload.username}`;
+      state.loggedIn = true;
     },
     [registerUser.fulfilled]: (state, action) => {
       state.username = `org.couchdb.user:${action.payload.username}`;
+      state.loggedIn = true;
     },
     [logOutUser.fulfilled]: (state, action) => {
       state.username = '';
+      state.loggedIn = false;
     },
   },
 });
 
 export const SelectCurrentUsername = (state) => state.auth.username;
+export const SelectLoggedIn = (state) => state.auth.loggedIn;
 
 export default authSlice.reducer;

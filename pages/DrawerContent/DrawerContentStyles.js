@@ -1,11 +1,9 @@
-import { StyleSheet, Dimensions } from 'react-native';
-
-const { height, width } = Dimensions.get('window');
+import { StyleSheet } from 'react-native';
 
 export const styles = StyleSheet.create({
   drawerContainer: {
     marginHorizontal: 25,
-    marginVertical: 25,
+    marginVertical: 10,
     flex: 1,
     justifyContent: 'space-between',
   },
@@ -17,7 +15,7 @@ export const styles = StyleSheet.create({
   },
   nameText: {
     alignSelf: 'center',
-    fontSize: 20,
+    fontSize: 18,
     color: '#575757',
   },
   emptyContainer: {
@@ -31,7 +29,7 @@ export const styles = StyleSheet.create({
   iconContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    marginTop: 20,
+    marginTop: 15,
   },
   iconSquare: {
     padding: 8,
@@ -40,7 +38,7 @@ export const styles = StyleSheet.create({
     margin: 5,
   },
   drawerItemContainer: {
-    marginTop: 35,
+    marginTop: 25,
   },
   drawerElement: {
     flexDirection: 'row',
@@ -62,7 +60,7 @@ export const styles = StyleSheet.create({
   },
   drawerElementText: {
     marginLeft: 12,
-    fontSize: 18,
+    fontSize: 16,
     color: '#575757',
   },
   logOutView: {

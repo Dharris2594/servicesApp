@@ -20,7 +20,11 @@ export const MyServicesStack = () => {
         component={MyServiceDetail}
         options={{ headerShown: false }}
       />
-      <Stack.Screen name="AddUpdateService" component={AddUpdateService} />
+      <Stack.Screen
+        name="AddUpdateService"
+        options={{ headerShown: false }}
+        component={AddUpdateService}
+      />
     </Stack.Navigator>
   );
 };
