@@ -32,7 +32,6 @@ export const MyServices = ({ navigation }) => {
       },
     })
       .on('paused', () => {
-        console.log('PAUSADO');
         dispatch(loadUserServices({ user: username, page: 1 }))
           .unwrap()
           .then((result) => setLoading(false))
@@ -44,9 +43,7 @@ export const MyServices = ({ navigation }) => {
       .on('active', function (info) {
         setLoading(true);
       })
-      .on('complete', function (info) {
-        console.log('TERMINADO');
-      });
+      .on('complete', function (info) {});
 
     return () => syncHandler.cancel();
   }, [dispatch, username]);

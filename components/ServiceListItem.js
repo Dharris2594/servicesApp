@@ -98,6 +98,7 @@ const styles = StyleSheet.create({
   },
   imgContainer: {
     flex: 1,
+    backgroundColor: 'rgba(0,0,0,0.2)',
   },
   ratingContainer: {
     alignSelf: 'flex-end',

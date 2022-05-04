@@ -51,7 +51,7 @@ export const styles = StyleSheet.create({
   },
   contenedor: {
     paddingHorizontal: 30,
-    paddingVertical: 15,
+    paddingVertical: 20,
   },
   pickerItem: {
     fontSize: 14,
@@ -65,6 +65,7 @@ export const styles = StyleSheet.create({
     marginVertical: 10,
   },
   textArea: {
+    padding: 10,
     marginTop: 10,
     borderWidth: 1,
     borderColor: '#DCDEDF',

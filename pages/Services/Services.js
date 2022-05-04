@@ -6,7 +6,7 @@ import { ServicesUI } from './ServicesUI';
 import { SelectLoggedIn } from '../../store/auth/authSlice';
 import { useFocusEffect } from '@react-navigation/native';
 
-export const Services = ({ navigation, route }) => {
+export const Services = ({ navigation }) => {
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(true);
   const services = useSelector(SelectServices);

@@ -46,6 +46,7 @@ export const AddUpdateServiceUI = ({
   setSelectedCategory,
 }) => {
   const input2 = useRef();
+  const input3 = useRef();
   const picker1 = useRef();
   const navigation = useNavigation();
 
@@ -132,12 +133,14 @@ export const AddUpdateServiceUI = ({
             style={styles.textInput}
             value={price}
             ref={input2}
-            returnKeyType="done"
+            returnKeyType="next"
+            onSubmitEditing={() => input3.current.focus()}
             onChangeText={(t) => setPrice(t)}
           />
           <Text style={styles.title}>Descripcion</Text>
           <TextInput
             multiline={true}
+            ref={input3}
             style={styles.textArea}
             value={description}
             numberOfLines={6}

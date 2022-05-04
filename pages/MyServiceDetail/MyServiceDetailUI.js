@@ -26,6 +26,7 @@ export const MyServiceDetailUI = ({
     <View style={styles.globalContainer}>
       <ImageBackground
         style={styles.image}
+        imageStyle={styles.imageStyle}
         source={{ uri: `data:image;base64,${service.img}` }}
       >
         <View style={styles.imgContainer}>
@@ -36,6 +37,7 @@ export const MyServiceDetailUI = ({
             size={40}
             style={styles.icon}
           />
+          <Text style={styles.onetofive}>1/5</Text>
           <View style={styles.ratingContainer}>
             <Text style={styles.rating}>{service.rating}</Text>
             <Image style={styles.stars} source={star} />
@@ -52,13 +54,18 @@ export const MyServiceDetailUI = ({
           <ScrollView style={styles.scrollText}>
             <Text style={styles.description}>{service.description}</Text>
           </ScrollView>
-
+          <View style={styles.seeContracts}>
+            <View style={styles.rowContracts}>
+              <Icon color="black" name="person" size={20} />
+              <Text style={styles.miniText}>Ver contratos</Text>
+            </View>
+            <Text style={styles.miniText}>
+              57 personas han contratado este servicio
+            </Text>
+          </View>
           <View style={styles.rowContainer}>
             <View>
               <Text style={styles.comments}>COMENTARIOS</Text>
-              <Text style={styles.miniText}>
-                57 personas han contratado este servicio
-              </Text>
             </View>
             <View>
               <Icon

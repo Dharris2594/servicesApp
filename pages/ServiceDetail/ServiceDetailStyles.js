@@ -62,6 +62,14 @@ export const styles = StyleSheet.create({
     height: height * 0.125,
     marginBottom: 20,
   },
+  onetofive: {
+    alignSelf: 'flex-end',
+    color: 'white',
+    position: 'absolute',
+    left: 20,
+    bottom: 20,
+    fontSize: 20,
+  },
   description: {
     marginTop: 15,
     textAlign: 'justify',

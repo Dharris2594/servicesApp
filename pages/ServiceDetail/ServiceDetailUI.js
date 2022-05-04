@@ -25,6 +25,7 @@ export const ServiceDetailUI = ({ service }) => {
             size={40}
             style={styles.icon}
           />
+          <Text style={styles.onetofive}>1/5</Text>
           <View style={styles.ratingContainer}>
             <Text style={styles.rating}>{service.rating}</Text>
             <Image style={styles.stars} source={star} />

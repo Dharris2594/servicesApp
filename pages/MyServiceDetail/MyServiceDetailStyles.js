@@ -21,6 +21,15 @@ export const styles = StyleSheet.create({
     flex: 1,
     padding: 10,
     justifyContent: 'space-between',
+    backgroundColor: 'rgba(0,0,0,0.2)',
+  },
+  onetofive: {
+    alignSelf: 'flex-end',
+    color: 'white',
+    position: 'absolute',
+    left: 20,
+    bottom: 20,
+    fontSize: 20,
   },
   icon: {
     alignSelf: 'flex-start',
@@ -33,6 +42,9 @@ export const styles = StyleSheet.create({
     width: width * 1,
     height: height * 0.3,
     resizeMode: 'cover',
+  },
+  imageStyle: {
+    backgroundColor: 'rgba(0,0,0,0.5)',
   },
   dataContainer: {
     flex: 1,
@@ -60,11 +72,23 @@ export const styles = StyleSheet.create({
   },
   scrollText: {
     height: height * 0.125,
-    marginBottom: 20,
+    marginBottom: 15,
   },
   description: {
     marginTop: 15,
     textAlign: 'justify',
+  },
+  seeContracts: {
+    marginBottom: 10,
+  },
+  rowContracts: {
+    borderWidth: 1,
+    flexDirection: 'row',
+    alignItems: 'center',
+    width: width * 0.25,
+    borderRadius: 20,
+    marginBottom: 5,
+    justifyContent: 'center',
   },
   comments: {
     color: 'black',
